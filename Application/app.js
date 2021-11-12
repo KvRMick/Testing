@@ -25,8 +25,14 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/api', apiRouter);
-app.use('/', index);
+// app.use('/api', apiRouter);
+// app.use('/', index);
+
+app.get("/api/hello", (req, res) => {
+    const obj = {first_name: "mike", last_name: "yohannes"}
+    const jsonObj = JSON.stringify(obj)
+    res.json(obj)
+})
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -40,6 +46,7 @@ app.use(function (req, res, next) {
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
+    console.log("catch all")
     app.use(function (err, req, res, next) {
         res.status(err.status || 500);
         res.render('error', {
