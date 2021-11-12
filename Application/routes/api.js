@@ -5,8 +5,8 @@ const customersRouter = require("./customers");
 const ordersRouter = require("./orders");
 
 module.exports = function () {
-  router.use("/products", productsRouter());
-  router.use("/customers", customersRouter());
-  router.use("/orders", ordersRouter());
+  //router.use("/products", productsRouter());
+  //router.use("/customers", customersRouter());
+  //router.use("/orders", ordersRouter());
   return router;
 };
