@@ -2,13 +2,15 @@
 var debug = require('debug');
 var express = require('express');
 var path = require('path');
-var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var index = require('./routes/index');
-var apiRouter = require("./routes/api");
+var customerRoutes = require("./routes/customers")
+
+var customersMockData = require("./mockdata/customers")
+var ordersMockData = require("./mockdata/orders")
+var productssMockData = require("./mockdata/products")
 
 var server; 
 var app = express();
@@ -17,21 +19,29 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// app.use('/api', apiRouter);
-// app.use('/', index);
+app.get("/", (req, res) => {
+    res.render("index")
+})
 
-app.get("/api/hello", (req, res) => {
-    const obj = {first_name: "mike", last_name: "yohannes"}
-    const jsonObj = JSON.stringify(obj)
-    res.json(obj)
+
+app.get("/appget/customers", (req, res) => {
+    res.json(customersMockData)
+})
+
+app.use("/api/customers", customerRoutes)
+
+app.get("/api/orders", (req, res) => {
+    res.json(ordersMockData)
+})
+
+app.get("/api/products", (req, res) => {
+    res.json(productssMockData)
 })
 
 // catch 404 and forward to error handler
@@ -46,7 +56,6 @@ app.use(function (req, res, next) {
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
-    console.log("catch all")
     app.use(function (err, req, res, next) {
         res.status(err.status || 500);
         res.render('error', {

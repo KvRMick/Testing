@@ -1,14 +1,13 @@
 var express = require('express');
 var router = express.Router();
-var customers = require('../public/mockdata/customers.json');
+var customersMockData = require("../mockdata/customers")
 
-module.exports =  function () {
-    console.log("customers")
-	router
-		.route('/')
-		.get((req, res, next) => {
-            console.log("ran")
-            // res.send("<h1>customers</h1>")
-            next()
-    })
-}
+
+router
+.route('/')
+.get((req, res, next) => {
+    res.json(customersMockData)
+    
+})
+
+module.exports = router;
