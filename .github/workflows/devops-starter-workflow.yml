@@ -5,12 +5,12 @@ on:
       - master
 
 env:
-  AZURE_WEBAPP_NAME: "EIC-Cohort"    # set this to your application's name
+  AZURE_WEBAPP_NAME: "Testing-Cohort"    # set this to your application's name
   AZURE_WEBAPP_PACKAGE_PATH: "Application"      # set this to the path to your web app project, defaults to the repository root
   NODE_VERSION: '8.11.1'                        # set this to the node version to use
-  RESOURCEGROUPNAME: "EIC-Cohort-rg"
+  RESOURCEGROUPNAME: "Testing-Cohort-rg"
   LOCATION: "East US"
-  HOSTINGPLANNAME: "EIC-Cohort-plan"
+  HOSTINGPLANNAME: "Testing-Cohort-plan"
   APPINSIGHTLOCATION: "East US"
   SKU: "F1 Free"
 
